@@ -2,4 +2,4 @@ TronGame
 ========
 
 PJC !
-Fait par Gui et Ypunès :p
+Fait par Guillaume et Younès :p
