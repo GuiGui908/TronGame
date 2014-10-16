@@ -1,15 +1,18 @@
 package model;
 
+import java.awt.Color;
+
 public class Joueur {
 	private String nom;
 
-	/* -1 = humain
+	/*	Role :
+	 * 0 = humain
 	 * 1 = ordinateur d'IA 1 
 	 * 2 = ordinateur d'IA 2 
 	 * 3 = ordinateur d'IA 3 */
 	private int role;
-	private int couleur;
 	private int score;
+	private Color couleur;
 	private int posX, posY;
 	private int direction;
 	private int vitesse;
@@ -21,15 +24,15 @@ public class Joueur {
 	}
 
 	public Joueur(String nom, int role) {
-		this(nom, role, role, role*10, role*10, 0, 50);
+		this(nom, role, role*6+10, role*6+16, 0, 0);
 	}
 
-	public Joueur(String nom, int role, int couleur, int posX,
+	public Joueur(String nom, int role, int posX,
 			int posY, int direction, int vitesse) {
 		this.nom = nom;
 		this.role = role;
-		this.couleur = couleur;
 		score = 0;
+		couleur = Joueur.getColor((byte) role);
 		this.posX = posX;
 		this.posY = posY;
 		this.direction = direction;
@@ -45,10 +48,6 @@ public class Joueur {
 		return role;
 	}
 
-	public int getCouleur() {
-		return couleur;
-	}
-
 	public int getScore() {
 		return score;
 	}
@@ -60,13 +59,9 @@ public class Joueur {
 	public int getPosY() {
 		return posY;
 	}
-
-	public int getDirection() {
-		return direction;
-	}
-
-	public int getVitesse() {
-		return vitesse;
+	
+	public Color getCouleur() {
+		return couleur;
 	}
 
 	/*  Setters  */
@@ -74,17 +69,36 @@ public class Joueur {
 		this.score = score;
 	}
 
-	public void setPosX(int posX) {
-		this.posX = posX;
+	public void vaHaut() {
+		posY--;
 	}
 
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-
-	public void setDirection(int direction) {
-		this.direction = direction;
+	public void vaBas() {
+		posY++;
 	}
 	
+	public void vaGauche() {
+		posX--;
+	}
 	
+	public void vaDroite() {
+		posX++;
+	}
+	
+	// Méthode statique
+	public static Color getColor(byte role) {
+		switch (role) {
+		case -1:
+			return Color.LIGHT_GRAY;
+		case 0:
+			return Color.GREEN;
+		case 1:
+			return Color.YELLOW;
+		case 2:
+			return Color.BLUE;
+		case 3:
+			return Color.RED;
+		}
+		return Color.WHITE;
+	}
 }
