@@ -14,7 +14,7 @@ public class Joueur {
 	private int score;
 	private Color couleur;
 	private int posX, posY;
-	private int direction;
+	private char direction;
 	private int vitesse;
 	
 	
@@ -24,7 +24,7 @@ public class Joueur {
 	}
 
 	public Joueur(String nom, int role, int vitesse) {
-		this(nom, role, role*6+10, role*6+16, 0, vitesse);
+		this(nom, role, role*6+10, role*6+16, '0', vitesse);
 	}
 
 	public int getVitesse() {
@@ -36,7 +36,7 @@ public class Joueur {
 	}
 
 	public Joueur(String nom, int role, int posX,
-			int posY, int direction, int vitesse) {
+			int posY, char direction, int vitesse) {
 		this.nom = nom;
 		this.role = role;
 		score = 0;
@@ -76,21 +76,20 @@ public class Joueur {
 	public void setScore(int score) {
 		this.score = score;
 	}
-
-	public void vaHaut() {
-		posX--;
-	}
-
-	public void vaBas() {
-		posX++;
-	}
 	
-	public void vaGauche() {
-		posY--;
-	}
-	
-	public void vaDroite() {
-		posY++;
+	public void changeDir(char d){
+		if(d == 'h') 
+			posX--;
+		else if(d == 'b') 
+			posX++;
+		else if(d == 'g') 
+			posY--;
+		else if(d == 'd') 
+			posY++;
+		else 
+			System.out.println("stop!");
+
+		direction = d;
 	}
 	
 	// Méthode statique

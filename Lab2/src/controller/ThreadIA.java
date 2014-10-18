@@ -15,7 +15,7 @@ public class ThreadIA extends ThreadJoueur {
 		while(true) {
 			try {
 				
-				jou.vaGauche();
+				jou.changeDir('g');
 				grille.setPos(jou);
 				sleep(jou.getVitesse());
 			} catch (InterruptedException e) {

@@ -2,16 +2,19 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import model.Grille;
-import model.Joueur;
+import model.*;
+import controller.*;
 
 public class FenetrePlateau extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private int x, y, width, height;
+	private ThreadHumain Thj;
 	
 	
 	public FenetrePlateau(int x, int y, int widht, int height) {
@@ -19,6 +22,7 @@ public class FenetrePlateau extends JFrame {
 		this.y = y;
 		this.width = widht;
 		this.height = height;
+		this.Thj = null;
 	}
 
 	public FenetrePlateau(Grille g, Joueur[] tabJou) {
@@ -38,5 +42,61 @@ public class FenetrePlateau extends JFrame {
 		plateauPan.add(hPan, BorderLayout.NORTH);
 		plateauPan.add(jPan);
 		add(plateauPan);
+		this.addKeyListener(new ActionUser());
 	}
+	
+	public void setCtrl(ThreadHumain ThJ)
+	{
+		this.Thj = ThJ;
+	}
+	
+	
+	class ActionUser implements KeyListener{
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getKeyCode() == KeyEvent.VK_UP){
+				
+				Thj.setDirection('h');
+				System.out.println("up");
+			}
+
+			if(e.getKeyCode() == KeyEvent.VK_DOWN){
+				Thj.setDirection('b');
+				System.out.println("down");
+			}
+
+			if(e.getKeyCode() == KeyEvent.VK_LEFT){
+				Thj.setDirection('g');
+				System.out.println("left");
+			}
+
+			if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+				Thj.setDirection('d');
+				System.out.println("right");
+			}
+
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+
+	
 }
+
+
+
+
+

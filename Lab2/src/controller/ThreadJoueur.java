@@ -1,7 +1,6 @@
 package controller;
 
-import model.Grille;
-import model.Joueur;
+import model.*;
 
 public class ThreadJoueur extends Thread {
 	Joueur jou;
@@ -14,5 +13,13 @@ public class ThreadJoueur extends Thread {
 		this.grille = grille;
 		grille.setPos(jou);
 	}
+
+	public Joueur getJou() {
+		return jou;
+	}
+
+	
+	
+	
 
 }
