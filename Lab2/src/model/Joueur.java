@@ -20,11 +20,19 @@ public class Joueur {
 	
 	/*  Constructeurs  */
 	public Joueur() {
-		this("Joueur par défaut", 0);
+		this("Joueur par défaut", 0, 0);
 	}
 
-	public Joueur(String nom, int role) {
-		this(nom, role, role*6+10, role*6+16, 0, 0);
+	public Joueur(String nom, int role, int vitesse) {
+		this(nom, role, role*6+10, role*6+16, 0, vitesse);
+	}
+
+	public int getVitesse() {
+		return vitesse;
+	}
+
+	public void setVitesse(int vitesse) {
+		this.vitesse = vitesse;
 	}
 
 	public Joueur(String nom, int role, int posX,
@@ -70,19 +78,19 @@ public class Joueur {
 	}
 
 	public void vaHaut() {
-		posY--;
+		posX--;
 	}
 
 	public void vaBas() {
-		posY++;
+		posX++;
 	}
 	
 	public void vaGauche() {
-		posX--;
+		posY--;
 	}
 	
 	public void vaDroite() {
-		posX++;
+		posY++;
 	}
 	
 	// Méthode statique

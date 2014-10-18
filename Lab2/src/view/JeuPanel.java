@@ -28,7 +28,8 @@ public class JeuPanel extends JPanel {
 	        	while(true) {
 	        		try {
 						sleep(16);		// 16ms*60 = 960ms (~1s) ==> 60fps
-						repaint();
+						//repaint();
+						updateUI(); 
 					} catch (InterruptedException e) {
 					}
 	        	}
