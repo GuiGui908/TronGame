@@ -51,11 +51,23 @@ public class Grille {
 	// Accesseurs
 	public byte getPos(int x, int y) {
 		try {
-			return plateau[y][x];
+			return plateau[y][x]; // a verifier
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.err.println(" NAWAK !!!!!!!!!!!!" + e);
 		}
 		return 0;
+	}
+	
+	public byte getPos(Joueur j)
+	{
+		int X = j.getPosX(), Y = j.getPosY();
+		try {
+			return plateau[X][Y]; // a verifier
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.err.println(" NAWAK !!!!!!!!!!!!" + e);
+		}
+		return 0;
+				
 	}
 	
 	public int getLargeur() {

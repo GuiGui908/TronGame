@@ -9,20 +9,19 @@ public class Partie {
 	public static void main(String[] args) {
 		
 		Grille grille = new Grille();
-		ThreadJoueur tabThreadJou[] = new ThreadJoueur[1];
-		Joueur tabJou[] = new Joueur[1];
-		tabJou[0] = new Joueur("Younès", 0, 200);		// crée un Joueur( nom, position, vitesse)
+		ThreadJoueur tabThreadJou[] = new ThreadJoueur[2];
+		Joueur tabJou[] = new Joueur[2];
+		tabJou[0] = new Joueur("Younès", 0, 80);		// crée un Joueur( nom, position, vitesse)
 		tabThreadJou[0] = new ThreadHumain(tabJou[0], grille);	// crée un Thread de contrôle
-		FenetrePlateau fenetrePlateau = new FenetrePlateau(grille, tabJou);
-		fenetrePlateau.setCtrl((ThreadHumain) tabThreadJou[0]);
+		
 
 		// Création des quatre joueurs 
 		
 		tabThreadJou[0].start();	// lance le Thread de contrôle
 		
-//		tabJou[0] = new Joueur("Ordi 1", 1, 200);
-//		tabThreadJou[0] = new ThreadIA(tabJou[0], grille);
-//		tabThreadJou[0].start();
+		tabJou[1] = new Joueur("Ordi 1", 1, 100);
+		tabThreadJou[1] = new ThreadIA(tabJou[1], grille);
+		tabThreadJou[1].start();
 		
 //		tabJou[2] = new Joueur("Ordi 2", 2);
 //		tabThreadJou[2] = new ThreadIA2(tabJou[2], grille);
@@ -33,6 +32,8 @@ public class Partie {
 //		tabThreadJou[3].start();
 
 		// Création de l'interface
+		FenetrePlateau fenetrePlateau = new FenetrePlateau(grille, tabJou);
+		fenetrePlateau.setCtrl((ThreadHumain) tabThreadJou[0]);
 		fenetrePlateau.setVisible(true);
 	}
 

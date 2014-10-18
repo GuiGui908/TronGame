@@ -24,7 +24,7 @@ public class Joueur {
 	}
 
 	public Joueur(String nom, int role, int vitesse) {
-		this(nom, role, role*6+10, role*6+16, '0', vitesse);
+		this(nom, role, role*6+10, role*6+16, 'd', vitesse);
 	}
 
 	public int getVitesse() {
@@ -48,6 +48,10 @@ public class Joueur {
 	}
 
 	/*  Getters  */
+	public char getDirection()
+	{
+		return direction;
+	}
 	public String getNom() {
 		return nom;
 	}
