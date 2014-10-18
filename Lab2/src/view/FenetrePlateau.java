@@ -9,12 +9,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import model.*;
-import controller.*;
 
 public class FenetrePlateau extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private int x, y, width, height;
-	private ThreadHumain Thj;
+	private Joueur humain;
 	
 	
 	public FenetrePlateau(int x, int y, int widht, int height) {
@@ -22,11 +21,11 @@ public class FenetrePlateau extends JFrame {
 		this.y = y;
 		this.width = widht;
 		this.height = height;
-		this.Thj = null;
 	}
 
-	public FenetrePlateau(Grille g, Joueur[] tabJou) {
-		this(200, 150, 576, 395);
+	public FenetrePlateau(Grille g, Joueur[] tabJou, Joueur humain) {
+		this(200, 150, 700, 500);
+		this.humain = humain;
 		System.out.println("Création de la fenêtre principale");
 		setTitle("Tron");
 		setBounds(x, y, width, height);
@@ -45,52 +44,41 @@ public class FenetrePlateau extends JFrame {
 		this.addKeyListener(new ActionUser());
 	}
 	
-	public void setCtrl(ThreadHumain ThJ)
-	{
-		this.Thj = ThJ;
-	}
+//	public void setCtrl(ThreadHumain ThJ) {
+//		this.Thj = ThJ;
+//	}
 	
 	
 	class ActionUser implements KeyListener{
 
 		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		public void keyTyped(KeyEvent e) { }
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
 			if(e.getKeyCode() == KeyEvent.VK_UP){
-				
-				Thj.setDirection('h');
+				humain.setDirection('h');
 				System.out.println("up");
 			}
 
 			if(e.getKeyCode() == KeyEvent.VK_DOWN){
-				Thj.setDirection('b');
+				humain.setDirection('b');
 				System.out.println("down");
 			}
 
 			if(e.getKeyCode() == KeyEvent.VK_LEFT){
-				Thj.setDirection('g');
+				humain.setDirection('g');
 				System.out.println("left");
 			}
 
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-				Thj.setDirection('d');
+				humain.setDirection('d');
 				System.out.println("right");
 			}
-
 		}
 
 		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
+		public void keyReleased(KeyEvent e) { }		
 	}
 
 	

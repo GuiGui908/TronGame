@@ -3,23 +3,14 @@ package controller;
 import model.*;
 
 public class ThreadJoueur extends Thread {
+	static Grille grille = new Grille();
 	Joueur jou;
-	Grille grille;
 	
 	// Constructeur
-	public ThreadJoueur(Joueur jou, Grille grille) {
+	public ThreadJoueur(Joueur jou) {
 		super();
 		this.jou = jou;
-		this.grille = grille;
 		grille.setPos(jou);
 	}
-
-	public Joueur getJou() {
-		return jou;
-	}
-
-	
-	
-	
 
 }

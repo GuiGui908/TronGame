@@ -1,6 +1,5 @@
 package controller;
 
-import model.Grille;
 import model.Joueur;
 import view.FenetrePlateau;
 
@@ -8,19 +7,17 @@ public class Partie {
 
 	public static void main(String[] args) {
 		
-		Grille grille = new Grille();
 		ThreadJoueur tabThreadJou[] = new ThreadJoueur[2];
 		Joueur tabJou[] = new Joueur[2];
-		tabJou[0] = new Joueur("Younès", 0, 80);		// crée un Joueur( nom, position, vitesse)
-		tabThreadJou[0] = new ThreadHumain(tabJou[0], grille);	// crée un Thread de contrôle
-		
+		tabJou[0] = new Joueur("Younès", 0, 40);		// crée un Joueur( nom, position, vitesse)
+		tabThreadJou[0] = new ThreadHumain(tabJou[0]);	// crée un Thread de contrôle
+		tabThreadJou[0].start();	// lance le Thread de contrôle
+	
 
 		// Création des quatre joueurs 
-		
-		tabThreadJou[0].start();	// lance le Thread de contrôle
-		
-		tabJou[1] = new Joueur("Ordi 1", 1, 100);
-		tabThreadJou[1] = new ThreadIA(tabJou[1], grille);
+
+		tabJou[1] = new Joueur("Ordi 1", 1, 50);
+		tabThreadJou[1] = new ThreadIA(tabJou[1]);
 		tabThreadJou[1].start();
 		
 //		tabJou[2] = new Joueur("Ordi 2", 2);
@@ -32,9 +29,10 @@ public class Partie {
 //		tabThreadJou[3].start();
 
 		// Création de l'interface
-		FenetrePlateau fenetrePlateau = new FenetrePlateau(grille, tabJou);
-		fenetrePlateau.setCtrl((ThreadHumain) tabThreadJou[0]);
+		FenetrePlateau fenetrePlateau = new FenetrePlateau(ThreadJoueur.grille, tabJou, tabJou[0]);
+		//fenetrePlateau.setCtrl((ThreadHumain) tabThreadJou[0]);
 		fenetrePlateau.setVisible(true);
+
 	}
 
 }

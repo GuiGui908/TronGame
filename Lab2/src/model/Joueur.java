@@ -27,14 +27,6 @@ public class Joueur {
 		this(nom, role, role*6+10, role*6+16, 'd', vitesse);
 	}
 
-	public int getVitesse() {
-		return vitesse;
-	}
-
-	public void setVitesse(int vitesse) {
-		this.vitesse = vitesse;
-	}
-
 	public Joueur(String nom, int role, int posX,
 			int posY, char direction, int vitesse) {
 		this.nom = nom;
@@ -75,12 +67,42 @@ public class Joueur {
 	public Color getCouleur() {
 		return couleur;
 	}
+	
+	public int getVitesse() {
+		return vitesse;
+	}
 
 	/*  Setters  */
 	public void setScore(int score) {
 		this.score = score;
 	}
 	
+	public void setVitesse(int vitesse) {
+		this.vitesse = vitesse;
+	}
+
+	public void setDirection(char direction) {
+		this.direction = direction;
+	}
+
+
+	public void avance() {
+		switch (direction) {
+		case 'h':
+			posY--;
+			break;
+		case 'b':
+			posY++;
+			break;
+		case 'd':
+			posX++;
+			break;
+		case 'g':
+			posX--;
+			break;
+		}
+	}
+	/*
 	public void changeDir(char d){
 		if(d == 'h') 
 			posX--;
@@ -94,7 +116,8 @@ public class Joueur {
 			System.out.println("stop!");
 
 		direction = d;
-	}
+	}*/
+	
 	
 	// Méthode statique
 	public static Color getColor(byte role) {

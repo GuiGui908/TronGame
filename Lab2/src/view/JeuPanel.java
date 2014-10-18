@@ -12,7 +12,7 @@ import model.Joueur;
 
 public class JeuPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	public static final int TAILLE_CASE = 8;
+	public static final int TAILLE_CASE = 4;
 	private Grille grille;
 	private int H , L;
 
@@ -50,8 +50,8 @@ public class JeuPanel extends JPanel {
 				Rectangle2D carre = new Rectangle2D.Double(
 						x*TAILLE_CASE,	// X coin supérieur gauche
 						y*TAILLE_CASE,	// Y coin supérieur gauche
-						TAILLE_CASE-1,	// largeur (-1 permet un espacement entre cases)
-						TAILLE_CASE-1);	// hauteur (idem)
+						TAILLE_CASE,	// largeur (-1 permet un espacement entre cases)
+						TAILLE_CASE);	// hauteur (idem)
 				g2.setPaint(Joueur.getColor(grille.getPos(x, y))); 
 				g2.fill(carre);
 			}
