@@ -24,7 +24,7 @@ public class FenetrePlateau extends JFrame {
 	}
 
 	public FenetrePlateau(Grille g, Joueur[] tabJou, Joueur humain) {
-		this(200, 150, 700, 500);
+		this(200, 150, 617, 436);
 		this.humain = humain;
 		System.out.println("Création de la fenêtre principale");
 		setTitle("Tron");
@@ -56,23 +56,28 @@ public class FenetrePlateau extends JFrame {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
+			if(!humain.isDead())
 			if(e.getKeyCode() == KeyEvent.VK_UP){
-				humain.setDirection('h');
+				if(humain.getDirection() != 'b')
+					humain.setDirection('h');
 				System.out.println("up");
 			}
 
 			if(e.getKeyCode() == KeyEvent.VK_DOWN){
-				humain.setDirection('b');
+				if(humain.getDirection() != 'h')
+					humain.setDirection('b');
 				System.out.println("down");
 			}
 
 			if(e.getKeyCode() == KeyEvent.VK_LEFT){
-				humain.setDirection('g');
+				if(humain.getDirection() != 'd')
+					humain.setDirection('g');
 				System.out.println("left");
 			}
 
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-				humain.setDirection('d');
+				if(humain.getDirection() != 'g')
+					humain.setDirection('d');
 				System.out.println("right");
 			}
 		}

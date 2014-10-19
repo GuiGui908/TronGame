@@ -5,51 +5,110 @@ import model.Joueur;
 
 public class ThreadIA extends ThreadJoueur {
 	// le joueur de couleur jaune 
-	
-	public ThreadIA(Joueur jou) {
-		super(jou);
+	Joueur humain = null;
+	public ThreadIA(Joueur humain, Joueur ordi) {
+		super(ordi);
+		this.humain = humain;
 	}
 
 	@Override
 	public void run() {
 		boolean running = true;
-		
+
 		System.out.println("Lancement de l'ordi : "+getName());
 		while(running) {
-			try {
+			try { 
+				int rand = (int) (Math.random() *10);
+				int x = jou.getPosX();
+				int y = jou.getPosY();
+				// une intelligence pour suivre le "humain"
+				if(jou.getRole() == 2)
+					jou.setDirection(humain.getDirection());
 				// Si la case devant est pas libre alors on tourne	
-				if(jou.getDirection() == 'd' && grille.getPos(jou.getPosX()+1 ,jou.getPosY()) != -1)
-					jou.setDirection('h');
-				else if(jou.getDirection() == 'g' && grille.getPos(jou.getPosX()-1, jou.getPosY()) != -1)
-					jou.setDirection('b');
-				else if(jou.getDirection() == 'h' && grille.getPos(jou.getPosX(), jou.getPosY()-1) != -1)
-					jou.setDirection('g'); 
-				else if(jou.getDirection() == 'b' && grille.getPos(jou.getPosX(), jou.getPosY()+1) != -1)
-					jou.setDirection('d');
 				
+				if(jou.getDirection() == 'd' && grille.getPos(x+1 ,y) != -1)  // direction droite
+				{	System.out.println(rand);
+				// si le haut et le bas est libre
+
+				if(jou.getRole() == 3 &&  grille.getPos(x ,y-1) == -1 && grille.getPos(x ,y+1) == -1)
+				{
+					if(rand <5) 						jou.setDirection('b');
+					else							    jou.setDirection('h');
+				}
+				else 
+				{
+					if(grille.getPos(x ,y-1) == -1)	 	jou.setDirection('h');
+					else 								jou.setDirection('b');
+				}
+
+				}
+				
+				else if(jou.getDirection() == 'g' && grille.getPos(x-1, y) != -1)  // direction gauche
+				{	System.out.println(rand);
+				// si le haut et le bas sont libre
+
+				if(jou.getRole() == 3 &&  grille.getPos(x ,y-1) == -1 && grille.getPos(x ,y+1) == -1)
+				{
+					if(rand <5) 						jou.setDirection('b');
+					else							    jou.setDirection('h');
+				}
+				else 
+				{
+					if(grille.getPos(x ,y-1) == -1)	 	jou.setDirection('h');
+					else 								jou.setDirection('b');
+				}
+
+				}
+				
+				else if(jou.getDirection() == 'h' && grille.getPos(x, y-1) != -1)  // direction haut
+				{ 
+					{	System.out.println(rand);
+					// si la gauche  et la droite sont libre
+
+					if(jou.getRole() == 3 &&  grille.getPos(x+1 ,y) == -1 && grille.getPos(x-1 ,y) == -1)
+					{
+						if(rand <5) 						jou.setDirection('g');
+						else							    jou.setDirection('d');
+					}
+					else 
+					{
+						if(grille.getPos(x-1 ,y) == -1)	 	jou.setDirection('g');
+						else 								jou.setDirection('d');
+					}
+
+					}
+				}
+				
+				
+				else if(jou.getDirection() == 'b' && grille.getPos(x, y+1) != -1)  // direction bas
+				{ 
+					{	System.out.println(rand);
+					// si la gauche  et la droite sont libre
+
+					if(jou.getRole() == 3 &&  grille.getPos(x+1 ,y) == -1 && grille.getPos(x-1 ,y) == -1)
+					{
+						if(rand <5) 						jou.setDirection('g');
+						else							    jou.setDirection('d');
+					}
+					else 
+					{
+						if(grille.getPos(x-1 ,y) == -1)	 	jou.setDirection('g');
+						else 								jou.setDirection('d');
+					}
+
+					}
+				}
+
 				jou.avance();		// On avance
+				
 				if(grille.setPos(jou) == false) {	// Si on s'est planté
 					// Fin de partie (l'IA s'est crashé)
 					running = false;
 					System.out.println("Ordinateur crashé !!!!");
-				}
+					jou.setDead(true);
+				}	
 				sleep(jou.getVitesse());
-				
-//				if(jou.getDirection() == 'd')
-//					if(jou.getPosY() ==  grille.getLargeur()-1)// || grille.getPos(jou.getPosX(),jou.getPosY()+1) != -1)
-//						jou.changeDir('h');
-//
-//				if(jou.getDirection() == 'g')
-//					if(jou.getPosY() == 1)// || grille.getPos(jou.getPosX(),jou.getPosY()-1) != -1)
-//						jou.changeDir('b');
-//
-//				if(jou.getDirection() == 'h')
-//					if(jou.getPosX() == 1 )//|| grille.getPos(jou.getPosX()-1,jou.getPosY()) != -1)
-//						jou.changeDir('g');
-//
-//				if(jou.getDirection() == 'b')
-//					if(jou.getPosX() ==  grille.getHauteur()-1 )//|| grille.getPos(jou.getPosX()+1,jou.getPosY()) != -1)
-//						jou.changeDir('d');
+
 			} catch (InterruptedException e) {
 			}
 		}

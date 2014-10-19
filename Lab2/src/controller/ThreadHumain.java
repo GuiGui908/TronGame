@@ -28,6 +28,7 @@ public class ThreadHumain extends ThreadJoueur {
 					// Fin de partie (l'humain s'est crashé)
 					running = false;
 					System.out.println("T'es mort bouffon !!!!");
+					jou.setDead(true);
 				}
 				sleep(jou.getVitesse());
 			} catch (InterruptedException e) {

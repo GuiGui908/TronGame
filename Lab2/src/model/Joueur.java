@@ -16,7 +16,7 @@ public class Joueur {
 	private int posX, posY;
 	private char direction;
 	private int vitesse;
-	
+	private boolean isDead;
 	
 	/*  Constructeurs  */
 	public Joueur() {
@@ -37,6 +37,15 @@ public class Joueur {
 		this.posY = posY;
 		this.direction = direction;
 		this.vitesse = vitesse;
+		isDead = false;
+	}
+
+	public boolean isDead() {
+		return isDead;
+	}
+
+	public void setDead(boolean isDead) {
+		this.isDead = isDead;
 	}
 
 	/*  Getters  */
@@ -102,22 +111,6 @@ public class Joueur {
 			break;
 		}
 	}
-	/*
-	public void changeDir(char d){
-		if(d == 'h') 
-			posX--;
-		else if(d == 'b') 
-			posX++;
-		else if(d == 'g') 
-			posY--;
-		else if(d == 'd') 
-			posY++;
-		else 
-			System.out.println("stop!");
-
-		direction = d;
-	}*/
-	
 	
 	// Méthode statique
 	public static Color getColor(byte role) {
