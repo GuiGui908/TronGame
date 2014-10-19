@@ -19,7 +19,8 @@ public class HeaderPanel extends JPanel {
 		//setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
 		debut = new JButton("Commencer");
-		//debut.addActionListener(new ClicCommencer());
+		debut.setEnabled(false);		// SI ON MET TRUE ICI ALORS ON PERD LE CONTROLE DU CLAVIER !!!!!!!!!!
+		debut.addActionListener(new ClicCommencer());
 		add(debut);
 
 		for(Joueur j : tabJou) {
