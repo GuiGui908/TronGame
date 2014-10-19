@@ -11,7 +11,7 @@ package model;
 	    
  */
 public class Grille {
-	private int largeur = 150, hauteur = 90;
+	private int largeur = 200, hauteur = 130;
 	private byte[][] plateau;
 
 	// Constructeur

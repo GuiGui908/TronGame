@@ -24,7 +24,7 @@ public class FenetrePlateau extends JFrame {
 	}
 
 	public FenetrePlateau(Grille g, Joueur[] tabJou, Joueur humain) {
-		this(200, 150, 617, 436);
+		this(300, 100, 817, 596);
 		this.humain = humain;
 		System.out.println("Création de la fenêtre principale");
 		setTitle("Tron");
