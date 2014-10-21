@@ -3,9 +3,9 @@ package controller;
 import model.*;
 
 public class ThreadJoueur extends Thread {
-	static Grille grille = new Grille();
-	Joueur jou;
-	boolean running;
+	public static Grille grille = new Grille();
+	protected Joueur jou;
+	protected boolean running;
 	
 	// Constructeur
 	public ThreadJoueur(Joueur jou) {

@@ -23,13 +23,16 @@ public class Partie extends Thread{
 		tabThreadJou[1] = new ThreadIA(humain,tabJou[1]);
 		tabThreadJou[2] = new ThreadIA(humain, tabJou[2]);
 		
-		for(ThreadJoueur thrd : tabThreadJou)
-			thrd.start();		
-
 		// Création de l'interface
-		FenetrePlateau fenetrePlateau = new FenetrePlateau(ThreadJoueur.grille, tabJou, humain);
+		FenetrePlateau fenetrePlateau = new FenetrePlateau(tabJou, tabThreadJou, humain);
 		fenetrePlateau.setVisible(true);
-
+/*
+		try {
+			sleep(1000);
+		} catch (InterruptedException e) {
+		}
+		for(ThreadJoueur thrd : tabThreadJou)
+			thrd.start();		*/
 	}
 	
 
@@ -40,35 +43,32 @@ public class Partie extends Thread{
 			
 			while(!end)
 			{
-			int vivant = tabJou.length;
-			for(Joueur jou : tabJou)
-				if(jou.isDead()) 
-					vivant--;
-//			System.out.println("vivant " +vivant);
-			if(vivant == 1)
-				{
-				for(ThreadJoueur thrd : tabThreadJou)
-					if(thrd.isRunning()) 
-						thrd.setRunning(false);
-				
+				int vivant = tabJou.length;
 				for(Joueur jou : tabJou)
+					if(jou.isDead()) 
+						vivant--;
+//				System.out.println("vivant " +vivant);
+				if(vivant == 1)
+				{
+					for(ThreadJoueur thrd : tabThreadJou)
+						if(thrd.isRunning()) 
+							thrd.setRunning(false);
+					
+					for(Joueur jou : tabJou)
 					{
-					if(!jou.isDead())
-						jou.setScore();
-				System.out.println("     "+ jou.getNom() +" : "+ jou.getScore());
+						if(!jou.isDead())
+							jou.setScore();
+							System.out.println("     "+ jou.getNom() +" : "+ jou.getScore());
 					}
 					System.out.println("winnnnnnnn !!!");
 					end= true;
 				}
-			
-			sleep(200);
+				sleep(200);
 			}
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
-	
 
 }

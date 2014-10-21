@@ -3,39 +3,32 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-import model.Grille;
+import controller.ThreadJoueur;
 import model.Joueur;
 
 public class JeuPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public static final int TAILLE_CASE = 4;
-	private Grille grille;
-	private int H , L;
 
-	public JeuPanel(Grille grille) {
-		this.grille = grille;
-		H = grille.getHauteur();
-		L = grille.getLargeur();
+	public JeuPanel() {
 		setBackground(new Color(120, 222, 245));
 		
-		// Thread qui redessine le dessin 60x par sec
-		Thread refresh = new Thread() {
-	        public void run() {
-	        	while(true) {
-	        		try {
-						sleep(16);		// 16ms*60 = 960ms (~1s) ==> 60fps
-						//repaint();
-						updateUI(); 
-					} catch (InterruptedException e) {
-					}
-	        	}
-	        }
-	      };
-	      refresh.start();
+		// Refresh rate : 16ms*60 = 960ms (~1s) ==> 60fps
+		Timer refresh = new Timer(16, new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				updateUI();
+			}
+		});
+		refresh.start();
 	}
 
 
@@ -45,14 +38,14 @@ public class JeuPanel extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;
 
 		// Dessine un rectangle pour chaque case de la grille
-		for(int x=0; x<L; x++) {
-			for(int y=0; y<H; y++) {
+		for(int x=0; x < ThreadJoueur.grille.getLargeur(); x++) {
+			for(int y=0; y < ThreadJoueur.grille.getHauteur(); y++) {
 				Rectangle2D carre = new Rectangle2D.Double(
 						x*TAILLE_CASE,	// X coin supérieur gauche
 						y*TAILLE_CASE,	// Y coin supérieur gauche
 						TAILLE_CASE,	// largeur (-1 permet un espacement entre cases)
 						TAILLE_CASE);	// hauteur (idem)
-				g2.setPaint(Joueur.getColor(grille.getPos(x, y))); 
+				g2.setPaint(Joueur.getColor(ThreadJoueur.grille.getPos(x, y))); 
 				g2.fill(carre);
 			}
 		}

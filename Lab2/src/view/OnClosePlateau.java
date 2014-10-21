@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -50,7 +51,8 @@ public class OnClosePlateau implements WindowListener {
 		pan.add(quit);
 		pan.add(cancel);
 		
-		confirm.setBounds(fp.getWidth()/2 + fp.getX()-200, fp.getHeight()/2 + fp.getY()-50, 400, 100);
+		confirm.setMinimumSize(new Dimension(300,  100));
+		confirm.setLocationRelativeTo(fp);
 		confirm.add(msg, BorderLayout.NORTH);
 		confirm.add(pan, BorderLayout.SOUTH);
 		confirm.setVisible(true);
