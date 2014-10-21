@@ -24,20 +24,34 @@ public class Joueur {
 	}
 
 	public Joueur(String nom, int role, int vitesse) {
-		this(nom, role, role*6+10, role*6+16, 'd', vitesse);
+		this(nom, role, role*20+30, role*30+20, vitesse);
 	}
 
 	public Joueur(String nom, int role, int posX,
-			int posY, char direction, int vitesse) {
+			int posY, int vitesse) {
+		int ranDir = (int) (Math.random() *3 +1);
+		
+		
 		this.nom = nom;
 		this.role = role;
 		score = 0;
 		couleur = Joueur.getColor((byte) role);
 		this.posX = posX;
 		this.posY = posY;
-		this.direction = direction;
 		this.vitesse = vitesse;
 		isDead = false;
+		switch(ranDir)
+		{
+		case 1: this.direction = 'g';
+		break;
+		case 2: this.direction = 'h';
+		break;
+		case 3: this.direction = 'd';
+		break;
+		case 4: this.direction = 'b';
+		break;
+		}
+		System.out.println("player created :"+nom + " " + ranDir + "dir "+ direction  );
 	}
 
 	public boolean isDead() {
@@ -82,8 +96,8 @@ public class Joueur {
 	}
 
 	/*  Setters  */
-	public void setScore(int score) {
-		this.score = score;
+	public void setScore() {
+		this.score++;
 	}
 	
 	public void setVitesse(int vitesse) {

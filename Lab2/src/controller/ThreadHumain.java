@@ -18,7 +18,7 @@ public class ThreadHumain extends ThreadJoueur {
 
 	@Override
 	public void run() {
-		boolean running = true;
+		
 		
 		System.out.println("Lancement humain : "+getName());
 		while(running) {

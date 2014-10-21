@@ -13,12 +13,13 @@ public class ThreadIA extends ThreadJoueur {
 
 	@Override
 	public void run() {
-		boolean running = true;
+		
 
 		System.out.println("Lancement de l'ordi : "+getName());
 		while(running) {
 			try { 
 				int rand = (int) (Math.random() *10);
+				
 				int x = jou.getPosX();
 				int y = jou.getPosY();
 				// une intelligence pour suivre le "humain"
@@ -27,7 +28,7 @@ public class ThreadIA extends ThreadJoueur {
 				// Si la case devant est pas libre alors on tourne	
 				
 				if(jou.getDirection() == 'd' && grille.getPos(x+1 ,y) != -1)  // direction droite
-				{	System.out.println(rand);
+				{	//System.out.println(rand);
 				// si le haut et le bas est libre
 
 				if(jou.getRole() == 3 &&  grille.getPos(x ,y-1) == -1 && grille.getPos(x ,y+1) == -1)
@@ -44,7 +45,7 @@ public class ThreadIA extends ThreadJoueur {
 				}
 				
 				else if(jou.getDirection() == 'g' && grille.getPos(x-1, y) != -1)  // direction gauche
-				{	System.out.println(rand);
+				{	//System.out.println(rand);
 				// si le haut et le bas sont libre
 
 				if(jou.getRole() == 3 &&  grille.getPos(x ,y-1) == -1 && grille.getPos(x ,y+1) == -1)
@@ -62,7 +63,7 @@ public class ThreadIA extends ThreadJoueur {
 				
 				else if(jou.getDirection() == 'h' && grille.getPos(x, y-1) != -1)  // direction haut
 				{ 
-					{	System.out.println(rand);
+					{	//System.out.println(rand);
 					// si la gauche  et la droite sont libre
 
 					if(jou.getRole() == 3 &&  grille.getPos(x+1 ,y) == -1 && grille.getPos(x-1 ,y) == -1)
@@ -82,7 +83,7 @@ public class ThreadIA extends ThreadJoueur {
 				
 				else if(jou.getDirection() == 'b' && grille.getPos(x, y+1) != -1)  // direction bas
 				{ 
-					{	System.out.println(rand);
+					{	//System.out.println(rand);
 					// si la gauche  et la droite sont libre
 
 					if(jou.getRole() == 3 &&  grille.getPos(x+1 ,y) == -1 && grille.getPos(x-1 ,y) == -1)
