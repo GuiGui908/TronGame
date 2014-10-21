@@ -1,74 +1,77 @@
 package controller;
 
+import java.awt.BorderLayout;
+
 import model.Joueur;
 import view.FenetrePlateau;
+import view.HeaderPanel;
+import view.JeuPanel;
 
 public class Partie extends Thread{
 
 	private ThreadJoueur[] tabThreadJou;
 	private Joueur[] tabJou;
+	private HeaderPanel hPan;
 	Joueur humain;
 	
 	public Partie() {
 		
 		tabThreadJou = new ThreadJoueur[3];
 	    tabJou = new Joueur[3];
-	    humain = new Joueur("Younès", 0, 20);		// crée un Joueur( nom, position, vitesse)
-	    
+
+	    // Crée les Joueurs( nom, position, vitesse)
+	    humain = new Joueur("Younès", 0, 20);
 	    tabJou[0] = humain;
 	    tabJou[1] = new Joueur("Ordi 1", 3, 20);
 		tabJou[2] = new Joueur("Ordi 2",2, 20);
 	    
-		tabThreadJou[0] = new ThreadHumain(humain);	// crée un Thread de contrôle
+		// crée les Threads de contrôle
+		tabThreadJou[0] = new ThreadHumain(humain);
 		tabThreadJou[1] = new ThreadIA(humain,tabJou[1]);
 		tabThreadJou[2] = new ThreadIA(humain, tabJou[2]);
 		
 		// Création de l'interface
-		FenetrePlateau fenetrePlateau = new FenetrePlateau(tabJou, tabThreadJou, humain);
+		FenetrePlateau fenetrePlateau = new FenetrePlateau(humain);
+		hPan = new HeaderPanel(tabJou, tabThreadJou);
+		JeuPanel jPan = new JeuPanel();
+		
+		fenetrePlateau.getContentPane().add(hPan, BorderLayout.NORTH);
+		fenetrePlateau.getContentPane().add(jPan);
 		fenetrePlateau.setVisible(true);
-/*
-		try {
-			sleep(1000);
-		} catch (InterruptedException e) {
-		}
-		for(ThreadJoueur thrd : tabThreadJou)
-			thrd.start();		*/
 	}
 	
 
 	@Override
 	public void run() {
 		try {
-			boolean end = false;
-			
-			while(!end)
+			while(true)
 			{
 				int vivant = tabJou.length;
 				for(Joueur jou : tabJou)
 					if(jou.isDead()) 
 						vivant--;
+				
 //				System.out.println("vivant " +vivant);
+				// Si il reste plus qu'un thread vivant
 				if(vivant == 1)
 				{
-					for(ThreadJoueur thrd : tabThreadJou)
-						if(thrd.isRunning()) 
-							thrd.setRunning(false);
-					
-					for(Joueur jou : tabJou)
-					{
-						if(!jou.isDead())
-							jou.setScore();
-							System.out.println("     "+ jou.getNom() +" : "+ jou.getScore());
+					for(Joueur jou : tabJou) {
+						if(!jou.isDead()) {
+							jou.setScore();			// Score++
+							jou.setDead(true);		// On tue le dernier joueur pour arrêter le thread
+							sleep(64);				// On attend un peu pour être sûr que le thread s'est arrêté
+						}
+						System.out.println("     "+ jou.getNom() +" : "+ jou.getScore());
+						jou.setDead(false);		// On réanime chaque joueur pour la prochaine partie
 					}
 					System.out.println("winnnnnnnn !!!");
-					end= true;
+					hPan.setCommencerTrue();
 				}
-				sleep(200);
+				sleep(50);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		
 	}
-
 }

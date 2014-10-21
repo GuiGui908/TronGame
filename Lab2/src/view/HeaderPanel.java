@@ -20,6 +20,7 @@ public class HeaderPanel extends JPanel {
 	private Joueur[] tabJou;
 	private JLabel[] lblJoueur;
 
+	// Constructeur
 	public HeaderPanel(Joueur[] tabJou, ThreadJoueur[] tabThreadJou) {
 		this.tabThreadJou = tabThreadJou;
 		this.tabJou = tabJou;
@@ -29,7 +30,8 @@ public class HeaderPanel extends JPanel {
 		setLayout(new FlowLayout(FlowLayout.CENTER));
 
 		debut = new JButton("Commencer");
-		debut.setFocusable(false);
+		debut.setFocusable(false);		// Sinon le focus est sur le bouton et non sur la fenêtre...
+										// et donc le listenner sur les flèches du clavier est HS
 		debut.addActionListener(new ClicCommencerListener());
 		add(debut);
 
@@ -54,15 +56,25 @@ public class HeaderPanel extends JPanel {
 		refreshScores.start();
 	}
 	
+	public void setCommencerTrue() {
+		debut.setEnabled(true);
+	}
+	
+	// Listenner du bouton
 	class ClicCommencerListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Clic commencer !!");
 			debut.setEnabled(false);
+			ThreadJoueur.grille.initGrille();	// Réinitialise la grille
+			
+			// Lance tous les Threads des joueurs
 			for(ThreadJoueur thj : tabThreadJou) {
 				if(!thj.isAlive())
-					thj.start();
+					thj.start();	// start
+				else
+					thj.notify();	// ou réveille
 			}
 		}
 	}

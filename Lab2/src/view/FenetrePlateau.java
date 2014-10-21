@@ -1,13 +1,10 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
-import controller.ThreadJoueur;
 import model.*;
 
 public class FenetrePlateau extends JFrame {
@@ -15,22 +12,16 @@ public class FenetrePlateau extends JFrame {
 	private Joueur humain;
 	
 	
-	public FenetrePlateau(Joueur[] tabJou, ThreadJoueur[] tabThreadJou, Joueur humain) {
+	public FenetrePlateau(Joueur humain) {
 		System.out.println("Création de la fenêtre principale");
 		this.humain = humain;
 		setTitle("Tron");
-		setMinimumSize(new Dimension(817, 596));
-		setLocationRelativeTo(null);
+		setSize(817, 596);
+		setLocationRelativeTo(null);		// Au centre de l'écran
 		/* Décommenter pour ajouter la popup de fermeture de fenêtre
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new OnClosePlateau(this));*/
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		HeaderPanel hPan = new HeaderPanel(tabJou, tabThreadJou);
-		JeuPanel jPan = new JeuPanel();
-		getContentPane().add(hPan, BorderLayout.NORTH);
-		getContentPane().add(jPan);
-
 		addKeyListener(new ActionUser());
 	}
 
