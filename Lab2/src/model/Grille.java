@@ -21,7 +21,7 @@ public class Grille {
 	}
 	
 	// initialisée par défaut à -1
-	public void initGrille() {
+	public synchronized void initGrille() {
 		for(int i=0; i<hauteur; i++)
 			for(int j=0; j<largeur; j++)
 				plateau[i][j] = -1;
