@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.util.Random;
 
 public class Joueur {
 	private String nom;
@@ -29,9 +30,7 @@ public class Joueur {
 
 	public Joueur(String nom, int role, int posX,
 			int posY, int vitesse) {
-		int ranDir = (int) (Math.random() *3 +1);
-		
-		
+
 		this.nom = nom;
 		this.role = role;
 		score = 0;
@@ -40,18 +39,15 @@ public class Joueur {
 		this.posY = posY;
 		this.vitesse = vitesse;
 		isDead = false;
-		switch(ranDir)
-		{
-		case 1: this.direction = 'g';
-		break;
-		case 2: this.direction = 'h';
-		break;
-		case 3: this.direction = 'd';
-		break;
-		case 4: this.direction = 'b';
-		break;
+		// Direction aléatoire (droite ou bas 1 chance sur 2)
+		switch(new Random().nextInt(2)) {
+		case 0:
+			this.direction = 'd';
+			break;
+		case 1:
+			this.direction = 'b';
 		}
-		System.out.println("player created :"+nom + " " + ranDir + "dir "+ direction  );
+		System.out.println("player created : "+nom + " dir="+ direction);
 	}
 
 	public boolean isDead() {
@@ -124,6 +120,11 @@ public class Joueur {
 			posX--;
 			break;
 		}
+	}
+	
+	public void reinitPos() {
+		posX = role*20+30;
+		posY = role*30+20;
 	}
 	
 	// Méthode statique
