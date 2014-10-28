@@ -31,4 +31,6 @@ public class ThreadJoueur extends Thread {
 		grille.setPos(jou);
 		notifyAll();
 	}
+
+	
 }

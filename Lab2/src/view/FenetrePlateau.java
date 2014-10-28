@@ -15,7 +15,7 @@ public class FenetrePlateau extends JFrame {
 	public FenetrePlateau(Joueur humain) {
 		System.out.println("Création de la fenêtre principale");
 		this.humain = humain;
-		setTitle("Tron");
+		setTitle("Tron Game");
 		setSize(817, 596);
 		setLocationRelativeTo(null);		// Au centre de l'écran
 		/* Décommenter pour ajouter la popup de fermeture de fenêtre

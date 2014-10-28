@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.BorderLayout;
 
+import javax.swing.JLabel;
+
 import model.Joueur;
 import view.FenetrePlateau;
 import view.HeaderPanel;
@@ -12,10 +14,12 @@ public class Partie extends Thread{
 	private ThreadJoueur[] tabThreadJou;
 	private Joueur[] tabJou;
 	private HeaderPanel hPan;
+	private JeuPanel jPan;
 	Joueur humain;
+	boolean GameOver;
 	
 	public Partie() {
-		
+		GameOver = false;
 		tabThreadJou = new ThreadJoueur[4];
 	    tabJou = new Joueur[4];
 
@@ -36,10 +40,10 @@ public class Partie extends Thread{
 		// Création de l'interface
 		FenetrePlateau fenetrePlateau = new FenetrePlateau(humain);
 		hPan = new HeaderPanel(tabJou, tabThreadJou);
-		JeuPanel jPan = new JeuPanel();
+	    jPan = new JeuPanel();
 		
 		fenetrePlateau.getContentPane().add(hPan, BorderLayout.NORTH);
-		fenetrePlateau.getContentPane().add(jPan);
+		fenetrePlateau.getContentPane().add(jPan, BorderLayout.CENTER);
 		fenetrePlateau.setVisible(true);
 	}
 	
@@ -47,24 +51,79 @@ public class Partie extends Thread{
 	@Override
 	public void run() {
 		try {
-			while(true)
+			while(!GameOver)
 			{
 				// Si l'humain meurt, on arrête la manche
+				int vivant = 4;
+				
 				if(humain.isDead())
 				{
 					tabJou[1].setScore();
-					for(Joueur jou : tabJou) {
-						if(!jou.isDead()) {
+					hPan.setLblScore();	
+					for(Joueur jou : tabJou)
+					{
+						if(!jou.isDead()) 
+						{
 										// Score++
 							jou.setDead(true);		// On tue le dernier joueur pour arrêter le thread
 							sleep(64);				// On attend un peu pour être sûr que le thread s'est arrêté
 						}
 						System.out.println("     "+ jou.getNom() +" : "+ jou.getScore());
+						
+					
+					}
+					System.out.println(" ordi winnnnnnnn !!!");
+					
+					if(tabJou[1].getScore() < 3 )
+						hPan.setCommencerTrue();
+		
+					else
+					{
+						jPan.setOver();
+						GameOver = true;
+					}
+						
+					
+				}
+				
+				
+				for(Joueur jou : tabJou)
+					if(jou.isDead()) vivant--;
+						
+						
+						
+				if(vivant == 2)		
+				{
+					tabJou[0].setScore();
+					hPan.setLblScore();	
+					
+					for(Joueur jou : tabJou)
+					{
+						if(!jou.isDead()) 
+						{
+										// Score++
+							jou.setDead(true);		// On tue le dernier joueur pour arrêter le thread
+							sleep(64);				// On attend un peu pour être sûr que le thread s'est arrêté
+						}
+						System.out.println("     "+ jou.getNom() +" : "+ jou.getScore());
+						
 						jou.setDead(false);		// On réanime chaque joueur pour la prochaine partie
 					}
-					System.out.println("winnnnnnnn !!!");
-					hPan.setCommencerTrue();
+					
+					System.out.println(" you winnnnnnnn !!!");
+					
+					if(tabJou[0].getScore() < 3 )
+						hPan.setCommencerTrue();
+					
+					else
+					{	
+						jPan.setOver();
+						GameOver = true;
+					}
 				}
+				
+				
+				
 				sleep(50);
 			}
 		} catch (InterruptedException e) {

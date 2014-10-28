@@ -48,13 +48,16 @@ public class HeaderPanel extends JPanel {
 	public void setCommencerTrue() {
 
 		debut.setEnabled(true);
-		if(!tabJou[0].isDead())
-			lblJoueur.setText("   User : "+ tabJou[0].getScore());
-		else
-			lblOrdi.setText("Ordi : " + tabJou[0].getScore());
-			
 			
 		
+	}
+	
+	public void  setLblScore() {
+		if(!tabJou[0].isDead())
+			lblJoueur.setText("   User :  "+ tabJou[0].getScore());
+		else
+			lblOrdi.setText("   Ordi : " + tabJou[1].getScore());
+			
 	}
 	
 	// Listenner du bouton

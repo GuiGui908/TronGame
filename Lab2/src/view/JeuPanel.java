@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -7,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -49,6 +52,13 @@ public class JeuPanel extends JPanel {
 				g2.fill(carre);
 			}
 		}
+	}
+	public void setOver() {
+		JLabel lblOver = new JLabel();
+		lblOver.setIcon (new ImageIcon ("images\\image.png"));
+		this.add(lblOver, BorderLayout.CENTER);
+		
+		
 	}
 
 }

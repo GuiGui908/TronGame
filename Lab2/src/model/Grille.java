@@ -28,7 +28,7 @@ public class Grille {
 	}
 
 	// Modifieur
-	public boolean setPos(Joueur j) {
+	public synchronized boolean setPos(Joueur j) {
 		int X = j.getPosX(), Y = j.getPosY();
 		
 		// Si on est dans les limites du plateau
@@ -43,7 +43,7 @@ public class Grille {
 	}
 	
 	// Accesseurs
-	public byte getPos(int x, int y) {
+	public synchronized byte getPos(int x, int y) {
 		try {
 			return plateau[y][x];
 		} catch (ArrayIndexOutOfBoundsException e) {
@@ -52,7 +52,7 @@ public class Grille {
 		}
 	}
 	
-	public byte getPos(Joueur j) {
+	public synchronized byte getPos(Joueur j) {
 		try {
 			return plateau [j.getPosY()] [j.getPosX()] ; 
 		} catch (ArrayIndexOutOfBoundsException e) {
