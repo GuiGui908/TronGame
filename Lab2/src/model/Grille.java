@@ -8,7 +8,7 @@ package model;
 	  1|    		 i(x)
 	  2|
 	  3|
-	    
+
  */
 public class Grille {
 	private int largeur = 200, hauteur = 130;
@@ -19,7 +19,7 @@ public class Grille {
 		plateau = new byte[hauteur][largeur];
 		initGrille();
 	}
-	
+
 	// initialisée par défaut à -1
 	public synchronized void initGrille() {
 		for(int i=0; i<hauteur; i++)
@@ -30,7 +30,7 @@ public class Grille {
 	// Modifieur
 	public synchronized boolean setPos(Joueur j) {
 		int X = j.getPosX(), Y = j.getPosY();
-		
+
 		// Si on est dans les limites du plateau
 		if(X>=0 && Y>=0 && X<largeur && Y<hauteur) {
 			// S'il n'y a pas colision
@@ -41,7 +41,7 @@ public class Grille {
 		}
 		return false;
 	}
-	
+
 	// Accesseurs
 	public synchronized byte getPos(int x, int y) {
 		try {
@@ -51,7 +51,7 @@ public class Grille {
 			return -100;
 		}
 	}
-	
+
 	public synchronized byte getPos(Joueur j) {
 		try {
 			return plateau [j.getPosY()] [j.getPosX()] ; 
@@ -60,7 +60,7 @@ public class Grille {
 			return -100;
 		}
 	}
-	
+
 	public int getLargeur() {
 		return largeur;
 	}

@@ -10,8 +10,8 @@ import model.*;
 public class FenetrePlateau extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private Joueur humain;
-	
-	
+
+
 	public FenetrePlateau(Joueur humain) {
 		System.out.println("Création de la fenêtre principale");
 		this.humain = humain;
@@ -36,25 +36,21 @@ public class FenetrePlateau extends JFrame {
 				if(e.getKeyCode() == KeyEvent.VK_UP){
 					if(humain.getDirection() != 'b')	// évite de se retourner
 						humain.setDirection('h');
-					System.out.println("up");
 				}
-	
+
 				if(e.getKeyCode() == KeyEvent.VK_DOWN){
 					if(humain.getDirection() != 'h')	// évite de se retourner
-						humain.setDirection('b');
-					System.out.println("down");
+						humain.setDirection('b');	
 				}
-	
+
 				if(e.getKeyCode() == KeyEvent.VK_LEFT){
 					if(humain.getDirection() != 'd')	// évite de se retourner
 						humain.setDirection('g');
-					System.out.println("left");
 				}
-	
+
 				if(e.getKeyCode() == KeyEvent.VK_RIGHT){
 					if(humain.getDirection() != 'g')	// évite de se retourner
 						humain.setDirection('d');
-					System.out.println("right");
 				}
 			}
 		}

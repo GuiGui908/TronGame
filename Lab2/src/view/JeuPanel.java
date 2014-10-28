@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -22,10 +21,10 @@ public class JeuPanel extends JPanel {
 
 	public JeuPanel() {
 		setBackground(new Color(120, 222, 245));
-		
+
 		// Refresh rate : 16ms*60 = 960ms (~1s) ==> 60fps
 		Timer refresh = new Timer(16, new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				updateUI();
@@ -36,7 +35,7 @@ public class JeuPanel extends JPanel {
 
 
 	@Override
-    public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 
@@ -56,9 +55,9 @@ public class JeuPanel extends JPanel {
 	public void setOver() {
 		JLabel lblOver = new JLabel();
 		lblOver.setIcon (new ImageIcon ("images\\image.png"));
-		this.add(lblOver, BorderLayout.CENTER);
-		
-		
+		this.add(lblOver);
+
+
 	}
 
 }

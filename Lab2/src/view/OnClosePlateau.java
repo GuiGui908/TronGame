@@ -14,7 +14,7 @@ public class OnClosePlateau implements WindowListener {
 	// de fermeture DANS la fenêtrePlateau
 	private FenetrePlateau fp;
 	JFrame confirm;
-	
+
 	public OnClosePlateau(FenetrePlateau fp) {
 		this.fp = fp;
 	}
@@ -50,7 +50,7 @@ public class OnClosePlateau implements WindowListener {
 		});
 		pan.add(quit);
 		pan.add(cancel);
-		
+
 		confirm.setMinimumSize(new Dimension(300,  100));
 		confirm.setLocationRelativeTo(fp);
 		confirm.add(msg, BorderLayout.NORTH);

@@ -31,8 +31,8 @@ public class HeaderPanel extends JPanel {
 		setLayout(new FlowLayout(FlowLayout.CENTER));
 
 		debut = new JButton("Commencer");
-		debut.setFocusable(false);		// Sinon le focus est sur le bouton et non sur la fenêtre...
-										// et donc le listenner sur les flèches du clavier est HS
+		debut.setFocusable(false);		// Sinon le focus est sur le bouton...
+		// et donc le listenner sur les flèches du clavier est HS
 		debut.addActionListener(new ClicCommencerListener());
 		add(debut);
 
@@ -44,22 +44,22 @@ public class HeaderPanel extends JPanel {
 		lblOrdi.setForeground(tabJou[1].getCouleur());
 		add(lblOrdi);
 	}
-	
+
 	public void setCommencerTrue() {
 
 		debut.setEnabled(true);
-			
-		
+
+
 	}
-	
+
 	public void  setLblScore() {
 		if(!tabJou[0].isDead())
 			lblJoueur.setText("   User :  "+ tabJou[0].getScore());
 		else
 			lblOrdi.setText("   Ordi : " + tabJou[1].getScore());
-			
+
 	}
-	
+
 	// Listenner du bouton
 	class ClicCommencerListener implements ActionListener {
 
@@ -68,7 +68,7 @@ public class HeaderPanel extends JPanel {
 			System.out.println("Clic commencer !!");
 			debut.setEnabled(false);
 			ThreadJoueur.grille.initGrille();	// Réinitialise la grille (clean)
-			
+
 			// Lance tous les Threads des joueurs
 			for(ThreadJoueur thj : tabThreadJou) {
 				if(!thj.isAlive())

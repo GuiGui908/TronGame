@@ -18,7 +18,7 @@ public class Joueur {
 	private char direction;
 	private int vitesse;
 	private boolean isDead;
-	
+
 	/*  Constructeurs  */
 	public Joueur() {
 		this("Joueur par défaut", 0, 0);
@@ -82,11 +82,11 @@ public class Joueur {
 	public int getPosY() {
 		return posY;
 	}
-	
+
 	public Color getCouleur() {
 		return couleur;
 	}
-	
+
 	public int getVitesse() {
 		return vitesse;
 	}
@@ -95,7 +95,7 @@ public class Joueur {
 	public void setScore() {
 		this.score++;
 	}
-	
+
 	public void setVitesse(int vitesse) {
 		this.vitesse = vitesse;
 	}
@@ -121,12 +121,12 @@ public class Joueur {
 			break;
 		}
 	}
-	
+
 	public void reinitPos() {
 		posX = role*20+30;
 		posY = role*30+20;
 	}
-	
+
 	// Méthode statique
 	public static Color getColor(byte role) {
 		switch (role) {
