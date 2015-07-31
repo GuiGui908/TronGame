@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -54,7 +55,8 @@ public class JeuPanel extends JPanel {
 	}
 	public void setOver() {
 		JLabel lblOver = new JLabel();
-		lblOver.setIcon (new ImageIcon ("images\\image.png"));
+		URL url = JeuPanel.class.getResource("/ress/image.png");
+		lblOver.setIcon (new ImageIcon (url));
 		this.add(lblOver);
 
 
